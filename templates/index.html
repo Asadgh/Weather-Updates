@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_landing.css') }}">
+    <title>Weather Update</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="cookie-banner">
+        <p>This website uses cookies to ensure you get the best experience on our website. By using our site, you agree to our use of cookies.</p>
+        <button class="cookie-btn" onclick="dismissCookieBanner()">Got it!</button>
+      </div>
+    <nav>
+        <h1>Weather Updates</h1>
+    </nav>
+    <main>
+        <form id="weather-form" action="/save_settings" method="get">
+            <div class="nest">
+                <label for="cur_nest">Current Nest:</label>
+                <select id="cur_nest" name="cur_nest">
+                    <option value="select">--Select--</option>
+                    {% for nest in data['nests'] %}
+                    <option value="{{ nest }}">{{ data['nests_dict'][nest][0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="launcher">
+                <label for="launcher">Launcher Direction:</label>
+                <select id="launcher" name="launcher">
+                    <option value="select">--Select--</option>
+                    <option value="north">North</option>
+                    <option value="south">South</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>

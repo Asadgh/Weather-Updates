@@ -1,0 +1,368 @@
+body {
+    font-family: 'Merriweather Sans', sans-serif;
+    background-color: #f5f5f5;
+}
+
+.headline {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.nest_wrapper,
+.phrase_wrapper,
+.date_wrapper {
+    flex: 1;
+    align-items: center;
+  }
+
+  .nest_wrapper {
+    text-align: left;
+  }
+  
+.phrase_wrapper {
+    text-align: center;
+  }
+  
+.date_wrapper {
+    text-align: right;
+  }
+
+h1.nest {
+    font-family: 'Rampart One', cursive;
+    font-size: 30px;
+}
+
+.date {
+    font-family: 'Space Mono', monospace;
+    
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    /* box-shadow: 3px 3px 15px #888888; */
+    padding: 8px;
+    margin-top: 10px;
+  }
+
+.nav_link {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 3px solid white;
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.nav_link:hover {
+    /* background-color: tomato; */
+    border-bottom: 3px solid tomato;
+    color: tomato;
+    font-weight: bold;
+}
+
+.nav_link:active {
+    border-bottom: 3px solid tomato; 
+}
+
+.launcher {
+    display: flex;
+    align-items: center;
+}
+
+#launcher {
+    margin-left: 5px;
+    width: 100px;
+    text-align: center;
+    font-size: medium;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.left_container,
+.right_container {
+    border-radius: 15px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 15px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right_container {
+    padding: 0px;
+}
+
+.small-card {
+    border: 1px solid #888888;
+    border-radius: 15px;
+    margin: 15px;
+    padding: 15px;
+    padding-bottom: 0px;
+
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.small_contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.max_text {
+    margin: 0px;
+    font-weight: normal;
+}
+
+.main_detail {
+    margin: 0px;
+    /* margin-top: 5px; */
+    font-size: 40px;
+}
+
+.gust_main {
+    margin: 15px;
+    margin-left: 0px;
+}
+
+.sub_detail {
+    margin: 0px;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+.time_span {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.temp_div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+.temp_icon {
+    width: 160px;
+    height: 80px;
+    padding-bottom: 20px;
+}
+
+.temp {
+    font-size: 40px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.rf_text {
+    margin: 0px;
+    font-weight: normal;
+}
+
+.temp_phrase_text {
+    margin: 0px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.wind_cont {
+    display: flex;
+    flex-direction: row;
+}
+
+.wind {
+    font-size: 40px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.gust {
+    margin-top: 15px;
+}
+
+.sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px auto;
+    align-items: center;
+}
+
+
+.others>h2 {
+    font-weight: normal;
+    font-size: 17px;
+    text-align: left;
+    margin-top: 25px;
+}
+
+.headline_phrase {
+    font-size: 20px;
+    color: tomato;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+footer>a {
+    text-decoration: none;
+    color: tomato;
+    text-align: center;
+}
+
+.modal {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position it relative to the viewport */
+    z-index: 1; /* Set the z-index to make it appear on top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Add a semi-transparent black background */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content>a {
+    display: block;
+    margin: 10px;
+    padding: 5px;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    width: 60%;
+    border: 1px solid tomato;
+    border-radius: 10px;
+}
+
+.modal-content>a:hover {
+    background-color: tomato;
+    color: white;
+}
+/* Style the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#myBtn {
+    padding: 5px;
+    border: 1px solid tomato;
+    border-radius: 8px;
+}
+
+#myBtn:hover,
+#myBtn:focus {
+    color: white;
+    background-color: tomato;
+}
+
+.lg_nav {
+    display: none;
+}
+
+.sm_nav {
+    display: block;
+}
+
+@media only screen and (min-width: 768px) {
+    .lg_nav {
+        display: block;
+    }
+    
+    .sm_nav {
+        display: none;
+    }
+
+    h1.nest {
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .nav_link {
+        font-size: 20px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+      }
+      .left_container {
+        flex: 1;
+    }
+    
+    .right_container {
+        flex: 1;
+      }
+    
+      .headline {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+        align-items: center;
+    }
+
+    .temp {
+        font-size: 80px;
+    }
+
+    .temp_icon {
+        width: 250px;
+        height: 150px;
+    }
+
+    .sub {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .others>h2 {
+        font-weight: normal;
+        font-size: 17px;
+        text-align: right;
+        margin-top: 10px;
+    }
+}

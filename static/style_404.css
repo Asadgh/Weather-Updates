@@ -1,0 +1,48 @@
+/* 404 page styles */
+body {
+    background-color: #f1f1f1;
+  }
+  
+  .container {
+    width: 70%;
+    margin: 0 auto;
+    padding: 50px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 72px;
+    margin-bottom: 20px;
+    color: #dd5555;
+    animation: shake 0.5s ease-in-out infinite;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 0); }
+    50% { transform: translate(5px, 0); }
+    75% { transform: translate(-5px, 0); }
+    100% { transform: translate(5px, 0); }
+  }
+  
+  p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #444444;
+  }
+  
+  a {
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #dd5555;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  a:hover {
+    background-color: #bb4444;
+  }
+  

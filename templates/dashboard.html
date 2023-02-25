@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Rampart+One&family=Space+Mono:ital@1&display=swap"
+        rel="stylesheet">
+    <title>Weather Update</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="headline">
+            <div class="nest_wrapper">
+                <h1 class="nest">{{ data['nest'] }}</h1>
+            </div>
+            <div class="phrase_wrapper">
+                <p class="headline_phrase">{{ data['daily']['text'] }}</p>
+            </div>
+            <div class="date_wrapper">
+                <h3 class="date">{{ data['daily']['date'] }}</h1>
+            </div>
+        </div>
+        <div class="nav">
+            <nav class="nav_items_wrapper">
+                <!-- <ul class="nav_items">
+                    {% for nest in data['nests'] %}
+                    <li class="nav_item">
+                        <a href={{ "/" + nest }} class="nav_link" id={{ nest }}>{{ nest }}</a>
+                        <button class="nav_btn" value={{ nest }} id={{ nest }}>{{ nest }}</button>
+                    </li>
+                    {% endfor %}
+                </ul> -->
+                <div class="lg_nav">
+                    {% for nest in data['nests'] %}
+                    <a href={{ "unique/" + nest }} class="nav_link" id={{ nest }}>{{ nest }}</a>
+                    {% endfor %}
+                </div>
+                <div class="sm_nav">
+                    <button id="myBtn">Change Nest</button>
+
+                    <!-- The modal dialog box -->
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            {% for nest in data['nests'] %}
+                            <a href={{ "unique/" + nest }} class="nav_link_modal" id={{ nest }}>
+                                {{ data['nests_dict'][nest][0] }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="launcher">
+                <label for="launcher">Launcher Direction:</label>
+                <select id="launcher" name="launcher">
+                    {% for dir in data['launcher_dirs'] %}
+                    {% if dir == data['launcher_dir'] %}
+                    <option value={{dir}} selected>{{dir.title()}}</option>
+                    {% else %}
+                    <option value={{dir}}>{{dir.title()}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="content">
+            <div class="left_container">
+                <div class="big-card">
+                    <h2 class="max_text">Today's Weather</h2>
+                    <div class="temp_div">
+                        <img typeof="foaf:Image" class="temp_icon"
+                            src={{ "https://developer.accuweather.com/sites/default/files/" + data['daily']['icon']
+                            + "-s.png" }} alt="" title="">
+                        <div>
+                            <h1 class="temp">{{ data['daily']['max_temp'] }}°C</h1>
+                            <h3 class="rf_text">RealFeel® {{ data['daily']['max_real_feel'] }}°C</h3>
+                        </div>
+                    </div>
+                    <div class="temp_phrase">
+                        <h2 class="temp_phrase_text">{{ data['daily']['long_phrase'] }}</h2>
+                    </div>
+                    <hr>
+                    <div class="sub">
+                        <div class="wind_wrapper">
+                            <div class="wind_cont">
+                                <span>
+                                    <img src="{{ url_for('static', filename='wind_sm.svg') }}" alt="">
+                                </span>
+                                <span>
+                                    <h2 class="wind">{{ data['daily']['wind_speed'] }}m/s</h2>
+                                    <h3 class="rf_text">{{ data['daily']['wind_dir'] }}</h3>
+                                </span>
+                            </div>
+                            <div class="wind_cont gust">
+                                <span>
+                                    <img src="{{ url_for('static', filename='wind_gust_sm.svg') }}" alt="">
+                                </span>
+                                <span>
+                                    <h2 class="wind">{{ data['daily']['wind_gust_speed'] }}m/s</h2>
+                                    <h3 class="rf_text">{{ data['daily']['wind_gust_dir'] }}</h3>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="others">
+                            <h2 class="uv_index">
+                                {{ data['daily']['uv_index'] }} : UV Index
+                            </h2>
+                            <h2 class="rain_probability">
+                                {{ data['daily']['rain_probability'] }}% Rain Probability
+                            </h2>
+                            <h2 class="snow_probability">
+                                {{ data['daily']['snow_probability'] }}% Snow Probability
+                            </h2>
+                            <h2 class="precipitation_probability">
+                                {{ data['daily']['precipitation_probability'] }}% Precipitation Probability
+                            </h2>
+                            <h2 class="thunderstorm_probability">
+                                {{ data['daily']['thunderstorm_probability'] }}% Thunderstorm Probability
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right_container">
+                <div class="small-card">
+                    <h4 class="max_text">Maximum Temperature</h4>
+                    <div class="small_contents">
+                        <div class="details">
+                            <span class="icn_span">
+                                <img class="icn" src="{{ url_for('static', filename='thermo.svg') }}" alt="">
+                            </span>
+                            <span class="details_span">
+                                <h2 class="main_detail">{{ data['hourly']['max_temp'] }}°C</h2>
+                                <h3 class="sub_detail">RealFeel® {{ data['hourly']['max_temp_rf'] }}°C</h3>
+                            </span>
+                        </div>
+                        <span class="time_span">
+                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            {{ data['hourly']['max_temp_hr'] }}
+                        </span>
+                    </div>
+                </div>
+                <div class="small-card">
+                    <h4 class="max_text">Maximum Wind</h4>
+                    <div class="small_contents">
+                        <div class="details">
+                            <span class="icn_span">
+                                <img class="icn" src="{{ url_for('static', filename='wind.svg') }}" alt="">
+                            </span>
+                            <span class="details_span">
+                                <h2 class="main_detail">{{ data['hourly']['max_wind'] }}m/s</h2>
+                                <h3 class="sub_detail">{{ data['hourly']['max_wind_dir'] }}</h3>
+                            </span>
+                        </div>
+                        <span class="time_span">
+                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            {{ data['hourly']['max_wind_hr'] }}
+                        </span>
+                    </div>
+                </div>
+                <div class="small-card">
+                    <h4 class="max_text">Maximum Wind Gust</h4>
+                    <div class="small_contents">
+                        <div class="details">
+                            <span class="icn_span">
+                                <img class="icn" src="{{ url_for('static', filename='wind_gust.svg') }}" alt="">
+                            </span>
+                            <span class="details_span">
+                                <h2 class="main_detail gust_main">{{ data['hourly']['max_wind_gust'] }}m/s</h2>
+                            </span>
+                        </div>
+                        <span class="time_span">
+                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            {{ data['hourly']['max_wind_gust_hr'] }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    Source (<a href={{ data['daily']['link'] }} target="_blank">Accuweather</a>)
+</footer>
+
+</html>
+
+<!-- <script>
+    let lis = document.getElementsByClassName('nav_link');
+    console.log(lis);
+</script> -->
+
+<script>
+    // Get the modal dialog box and the close button
+    var modal = document.getElementById("myModal");
+    var closeBtn = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, display the modal dialog box
+    document.getElementById("myBtn").onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on the close button or anywhere outside of the modal, hide it
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.getElementById("launcher").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        if ($('#launcher').val() === 'select') {
+            alert('Please Select A Valid Launcher Direction');
+        }
+        else {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify({
+                "direction": selectedValue
+            }));
+
+            location.reload();
+        }
+    });
+
+</script>

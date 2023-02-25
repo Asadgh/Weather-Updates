@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>500 - Internal Server Error</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_404.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>500 - Internal Server Error</h1>
+        <p>Oops! Something went wrong on our end. Please try again later.</p>
+        <p>Don't understand why you are seeing this? <a href="{{ url_for('feedback') }}">Report Issue</a></p>
+    </div>
+</body>
+
+</html>
