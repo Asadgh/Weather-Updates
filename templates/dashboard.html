@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Rampart+One&family=Space+Mono:ital@1&display=swap"
         rel="stylesheet">
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <title>Weather Update</title>
 </head>
 
@@ -187,11 +187,6 @@
 
 </html>
 
-<!-- <script>
-    let lis = document.getElementsByClassName('nav_link');
-    console.log(lis);
-</script> -->
-
 <script>
     // Get the modal dialog box and the close button
     var modal = document.getElementById("myModal");
@@ -219,15 +214,21 @@
             alert('Please Select A Valid Launcher Direction');
         }
         else {
-
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/update");
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.addEventListener('load', function (event) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log('Update successful');
+                    location.reload();
+                } else {
+                    console.error('Update failed with status ' + xhr.status);
+                }
+            });
             xhr.send(JSON.stringify({
                 "direction": selectedValue
             }));
-
-            location.reload();
+            // location.reload();
         }
     });
 

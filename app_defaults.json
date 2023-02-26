@@ -1,11 +1,1 @@
-{"APIKEY": "rK8nSpShb7UO2Ljmva0R652lLnMd5ekJ",
-"NESTS": {
-    "GH-1": ["GH-1, Omenako", "178522"],
-    "GH-2": ["GH-2, Mampong", "176780"],
-    "GH-3": ["GH-3, Vobsi", "180265"],
-    "GH-4": ["GH-4, Sefi Wiawso", "895990"],
-    "GH-5": ["GH-5, Anum", "902474"],
-    "GH-6": ["GH-6, Kete-Krachi", "181706"]
-},
-"LASTDATE": "2023-02-25"
-}
+{"APIKEY": "rK8nSpShb7UO2Ljmva0R652lLnMd5ekJ", "NESTS": {"GH-1": ["GH-1, Omenako", "178522"], "GH-2": ["GH-2, Mpanya", "176780"], "GH-3": ["GH-3, Vobsi", "180265"], "GH-4": ["GH-4, Sefi Wiawso", "895990"], "GH-5": ["GH-5, Anum", "902474"], "GH-6": ["GH-6, Kete-Krachi", "181706"]}, "LASTDATE": "2023-02-26"}
