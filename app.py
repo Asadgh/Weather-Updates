@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-with open("mysite/app_defaults.json", "r") as fileh:
+with open("app_defaults.json", "r") as fileh:
     app_json = json.load(fileh)
 
 APIKEY = app_json['APIKEY']
