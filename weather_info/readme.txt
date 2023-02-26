@@ -1,0 +1,1 @@
+Stores weather in in json format for both daily and hourly
