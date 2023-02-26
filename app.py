@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-with open("app_defaults.json", "r") as fileh:
+with open("mysite/app_defaults.json", "r") as fileh:
     app_json = json.load(fileh)
 
 APIKEY = app_json['APIKEY']
@@ -79,6 +79,12 @@ def home():
 def dashboard():
     settings = json.loads(request.cookies.get('settings', '{}'))
 
+    if settings == {} or ('nest' not in dict(settings).keys() and 'launcher_dir' not in dict(settings).keys()):
+        return render_template('index.html', data={
+            'nests': nests,
+            'nests_dict': NESTS,
+        })
+
     selected_nest = settings['cur_nest']
     launcher_dir = settings['launcher_dir']
 
@@ -118,6 +124,13 @@ def dashboard():
 
 @app.route('/unique/<nest>')
 def unique(nest):
+    settings = json.loads(request.cookies.get('settings', '{}'))
+
+    if settings == {} or ('nest' not in dict(settings).keys() and 'launcher_dir' not in dict(settings).keys()):
+        return render_template('index.html', data={
+            'nests': nests,
+            'nests_dict': NESTS,})
+
     if nest in nests:
         settings = json.loads(request.cookies.get('settings', '{}'))
         settings['cur_nest'] = nest
@@ -147,7 +160,7 @@ def feedback_info():
                 'number': number,
                 'message': message})
 
-    return redirect('/')  
+    return redirect('/')
 
 
 @app.errorhandler(404)
@@ -166,4 +179,4 @@ def bad_request(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
