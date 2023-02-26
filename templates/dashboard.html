@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Rampart+One&family=Space+Mono:ital@1&display=swap"
         rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <title>Weather Update</title>
 </head>
 
@@ -21,23 +22,15 @@
             <div class="nest_wrapper">
                 <h1 class="nest">{{ data['nest'] }}</h1>
             </div>
-            <div class="phrase_wrapper">
-                <p class="headline_phrase">{{ data['daily']['text'] }}</p>
-            </div>
+            <!-- <div class="phrase_wrapper">
+                <p class="headline_phrase">{{ data['daily']['short_phrase'] }}</p>
+            </div> -->
             <div class="date_wrapper">
                 <h3 class="date">{{ data['daily']['date'] }}</h1>
             </div>
         </div>
         <div class="nav">
             <nav class="nav_items_wrapper">
-                <!-- <ul class="nav_items">
-                    {% for nest in data['nests'] %}
-                    <li class="nav_item">
-                        <a href={{ "/" + nest }} class="nav_link" id={{ nest }}>{{ nest }}</a>
-                        <button class="nav_btn" value={{ nest }} id={{ nest }}>{{ nest }}</button>
-                    </li>
-                    {% endfor %}
-                </ul> -->
                 <div class="lg_nav">
                     {% for nest in data['nests'] %}
                     <a href={{ "unique/" + nest }} class="nav_link" id={{ nest }}>{{ nest }}</a>
@@ -144,8 +137,8 @@
                             </span>
                         </div>
                         <span class="time_span">
-                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
-                            {{ data['hourly']['max_temp_hr'] }}
+                            <img class="clock" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            @ {{ data['hourly']['max_temp_hr'] }}
                         </span>
                     </div>
                 </div>
@@ -162,8 +155,8 @@
                             </span>
                         </div>
                         <span class="time_span">
-                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
-                            {{ data['hourly']['max_wind_hr'] }}
+                            <img class="clock" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            @ {{ data['hourly']['max_wind_hr'] }}
                         </span>
                     </div>
                 </div>
@@ -179,8 +172,8 @@
                             </span>
                         </div>
                         <span class="time_span">
-                            <img class="icn" src="{{ url_for('static', filename='clock.svg') }}" alt="">
-                            {{ data['hourly']['max_wind_gust_hr'] }}
+                            <img class="clock" src="{{ url_for('static', filename='clock.svg') }}" alt="">
+                            @ {{ data['hourly']['max_wind_gust_hr'] }}
                         </span>
                     </div>
                 </div>

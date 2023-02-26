@@ -6,7 +6,7 @@ body {
 .headline {
     display: flex;
     flex-direction: column-reverse;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -15,19 +15,19 @@ body {
 .date_wrapper {
     flex: 1;
     align-items: center;
-  }
+}
 
-  .nest_wrapper {
+.nest_wrapper {
     text-align: left;
-  }
-  
+}
+
 .phrase_wrapper {
     text-align: center;
-  }
-  
+}
+
 .date_wrapper {
     text-align: right;
-  }
+}
 
 h1.nest {
     font-family: 'Rampart One', cursive;
@@ -36,20 +36,20 @@ h1.nest {
 
 .date {
     font-family: 'Space Mono', monospace;
-    
+
 }
 
 .nav {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     background-color: white;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     /* box-shadow: 3px 3px 15px #888888; */
     padding: 8px;
     margin-top: 10px;
-  }
+}
 
 .nav_link {
     text-decoration: none;
@@ -69,7 +69,7 @@ h1.nest {
 }
 
 .nav_link:active {
-    border-bottom: 3px solid tomato; 
+    border-bottom: 3px solid tomato;
 }
 
 .launcher {
@@ -123,9 +123,10 @@ h1.nest {
 
 .small_contents {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
+
 .max_text {
     margin: 0px;
     font-weight: normal;
@@ -232,15 +233,19 @@ footer>a {
 }
 
 .modal {
-    display: none; /* Hide the modal by default */
-    position: fixed; /* Position it relative to the viewport */
-    z-index: 1; /* Set the z-index to make it appear on top of other elements */
+    display: none;
+    /* Hide the modal by default */
+    position: fixed;
+    /* Position it relative to the viewport */
+    z-index: 1;
+    /* Set the z-index to make it appear on top of other elements */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4); /* Add a semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Add a semi-transparent black background */
 }
 
 .modal-content {
@@ -271,6 +276,7 @@ footer>a {
     background-color: tomato;
     color: white;
 }
+
 /* Style the close button */
 .close {
     color: #aaa;
@@ -278,6 +284,7 @@ footer>a {
     font-size: 28px;
     font-weight: bold;
 }
+
 .close:hover,
 .close:focus {
     color: black;
@@ -305,11 +312,19 @@ footer>a {
     display: block;
 }
 
+.clock {
+    display: none;
+}
+
 @media only screen and (min-width: 768px) {
+    .clock {
+        display: block;
+    }
+
     .lg_nav {
         display: block;
     }
-    
+
     .sm_nav {
         display: none;
     }
@@ -328,19 +343,20 @@ footer>a {
     .content {
         display: flex;
         flex-direction: row;
-      }
-      .left_container {
+    }
+
+    .left_container {
         flex: 1;
     }
-    
+
     .right_container {
         flex: 1;
-      }
-    
-      .headline {
+    }
+
+    .headline {
         display: flex;
         flex-direction: row;
-        justify-content:space-between;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -364,5 +380,11 @@ footer>a {
         font-size: 17px;
         text-align: right;
         margin-top: 10px;
+    }
+
+    .small_contents {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

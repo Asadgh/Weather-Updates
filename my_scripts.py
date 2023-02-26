@@ -1,6 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime
+import json
 
 
 def get_day_suffix(day):
@@ -26,19 +27,16 @@ def format_date(date_string):
 
 
 def emailer(info):
+    with open("feedback.json", "r") as fileh:
+        feedback_json = json.load(fileh)
+
     msg = f'Reported by; {info["name"]}\nReporter Email; {info["email"]}\
     \nReporter Number; {info["number"]}\n\n{info["message"]}'
-    # Set up the email message
-    msg = MIMEText(msg)
-    msg['Subject'] = 'New Complaint On Weather Updates'
-    msg['From'] = 'email@example.com'
-    msg['To'] = 'email@example.com'
 
-    # Connect to the SMTP server and send the email
-    with smtplib.SMTP('smtp.office365.com', 587) as smtp:
-        smtp.starttls()
-        smtp.login('email@example.com', 'YOUR-PASSWORD')
-        smtp.send_message(msg)
+    feedback_json[str(datetime.now())] = msg
+
+    with open("feedback.json", "w") as fileh:
+        json.dump(feedback_json, fileh)
 
 
 def convert_from_24(hour):

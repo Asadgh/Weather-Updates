@@ -1,23 +1,60 @@
 import requests
 import json
-from bs4 import BeautifulSoup
 from datetime import datetime
 from my_scripts import kmh_to_ms, format_date
+import pytz
+from os import path
 
+
+with open("app_defaults.json", "r") as fileh:
+    app_json = json.load(fileh)
+
+APIKEY = app_json['APIKEY']
+NESTS = app_json['NESTS']
+BASE = 'weather_info'
+
+
+def jobber():
+    LASTDATE = app_json['LASTDATE']
+    # Get the current time in GMT
+    tz = pytz.timezone('GMT')
+    now = datetime.now(tz)
+    if str(now.date()) != LASTDATE:
+        if now.hour >= 6 and now.minute >= 00:
+            fetch_weather()
+
+            app_json['LASTDATE'] = str(now.date())
+            with open("app_defaults.json", "w") as fileh:
+                json.dump(app_json, fileh)
 
 def fetch_weather():
-    datetime.now()
+    for nest in NESTS.keys():
+        LOCATIONKEY = NESTS[nest][1]
+        
+        daily_url = f"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{LOCATIONKEY}?apikey={APIKEY}&details=true&metric=true"
+        hourly_url = f"http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{LOCATIONKEY}?apikey={APIKEY}&details=true&metric=true"
+
+        daily_response = requests.get(daily_url)
+        daily_response_json = json.loads(daily_response.content)
+
+        with open(path.join(BASE, f"{nest}_Daily.json"), "w") as outfile:
+            json.dump(daily_response_json, outfile)
+
+        hourly_response = requests.get(hourly_url)
+        hourly_response_json = json.loads(hourly_response.content)
+
+        with open(path.join(BASE, f"{nest}_Hourly.json"), "w") as outfile:
+            json.dump(hourly_response_json, outfile)
 
 
-def get_daily_weather(LOCATIONKEY, APIKEY):
-    url = f"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{LOCATIONKEY}?apikey={APIKEY}&details=true&metric=true"
-    response = requests.get(url)
-    response_json = json.loads(response.content)
+def get_daily_weather(nest):
+    with open(path.join(BASE, f'{nest}_Daily.json'), "r") as fileh:
+        response_json = json.load(fileh)
 
     daily_weather_info = {}
 
     daily_weather_info["text"] = response_json["Headline"]["Text"]
-    daily_weather_info["date"] = format_date(str(datetime.fromisoformat(response_json["Headline"]["EffectiveDate"]).date()))
+    daily_weather_info["date"] = format_date(str(datetime.fromisoformat(response_json["DailyForecasts"][0]["Date"]).date()))
     daily_weather_info["category"] = response_json["Headline"]["Category"]
     daily_weather_info["max_temp"] = response_json["DailyForecasts"][0]["Temperature"]["Maximum"]["Value"]
     daily_weather_info["max_real_feel"] = response_json["DailyForecasts"][0]["RealFeelTemperature"]["Maximum"]["Value"]
@@ -52,11 +89,11 @@ def get_daily_weather(LOCATIONKEY, APIKEY):
 
 
 
-def get_hourly_weather(LOCATIONKEY, APIKEY):
-    url = f"http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{LOCATIONKEY}?apikey={APIKEY}&details=true&metric=true"
-    response = requests.get(url)
-    response_json = json.loads(response.content)
-    
+def get_hourly_weather(nest):
+
+    with open(path.join(BASE, f'{nest}_Hourly.json'), "r") as fileh:
+        response_json = json.load(fileh)
+
     hourly_weather_info = {
         "date": None,
 

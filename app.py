@@ -1,20 +1,16 @@
 from flask import Flask, render_template, request, jsonify, redirect, make_response, abort
-from weather import get_daily_weather, get_hourly_weather
+from weather import get_daily_weather, get_hourly_weather, jobber
 from my_scripts import hour_handler, wind_type, emailer
 import json
 
 
 app = Flask(__name__)
 
-APIKEY = 'YOUR-API-KEY'
-NESTS = {
-    'GH-1': ['GH-1, Omenako', '178522'],
-    'GH-2': ['GH-2, Mampong', '176780'],
-    'GH-3': ['GH-3, Vobsi', '180265'],
-    'GH-4': ['GH-4, Sefi Wiawso', '895990'],
-    'GH-5': ['GH-5, Anum', '902474'],
-    'GH-6': ['GH-6, Kete-Krachi', '181706']
-}
+with open("app_defaults.json", "r") as fileh:
+    app_json = json.load(fileh)
+
+APIKEY = app_json['APIKEY']
+NESTS = app_json['NESTS']
 
 nests = list(NESTS.keys())
 nests.sort()
@@ -83,11 +79,13 @@ def home():
 def dashboard():
     settings = json.loads(request.cookies.get('settings', '{}'))
 
-    selected_nest = NESTS[settings['cur_nest']]
+    selected_nest = settings['cur_nest']
     launcher_dir = settings['launcher_dir']
 
-    daily_weather_info = get_daily_weather(selected_nest[1], APIKEY)
-    hourly_weather_info = get_hourly_weather(selected_nest[1], APIKEY)
+    jobber()
+
+    daily_weather_info = get_daily_weather(selected_nest)
+    hourly_weather_info = get_hourly_weather(selected_nest)
 
     wind_deg = daily_weather_info['wind_dir_deg']
     daily_weather_info['wind_dir'] = f"{daily_weather_info['wind_dir']} ({wind_type(wind_deg, launcher_dir)})"
@@ -108,7 +106,7 @@ def dashboard():
         hourly_weather_info['max_temp_hr'])
 
     return render_template('dashboard.html', data={
-        'nest': selected_nest[0],
+        'nest': NESTS[selected_nest][0],
         'nests': nests,
         'nests_dict': NESTS,
         'daily': daily_weather_info,
@@ -139,7 +137,6 @@ def feedback():
 @app.route('/feedback_info', methods=['GET', 'POST'])
 def feedback_info():
     if request.method == 'POST':
-        # Handle form submission
         name = request.form.get('name')
         email = request.form.get('email')
         number = request.form.get('number')

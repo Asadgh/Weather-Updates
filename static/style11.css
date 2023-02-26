@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+  }
+  
+body {
+    height: 100vh;
+  }
+  
+.container {
+    height: 100%;
+  }
+
+.headline {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+  
+.nest_wrapper {
+    text-align: left;
+  }
+  
+.phrase_wrapper {
+    text-align: center;
+  }
+  
+.date_wrapper {
+    text-align: right;
+  }
+
+.nest_wrapper,
+.phrase_wrapper,
+.date_wrapper {
+    flex: 1;
+    align-items: center;
+  }
+  
+h1.nest {
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    font-size: 45px;
+  }
+  
+.phrase {
+    font-size: 20px;
+}
+
+.nav_items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .nav_items_wrapper {
+    background-color: #ecf0f1;
+    border-radius: 15px;
+    margin: 15px;
+    height: 40px;
+    box-shadow: 3px 3px 15px #888888;
+} */
+  
+.nav_link {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+    /* background-color: #fff; */
+    /* border: 2px solid #ccc;
+    border-radius: 0; */
+    /* width: 80px; */
+    border-bottom: 3px solid white;
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+.nav_link:hover {
+    /* background-color: tomato; */
+    border-bottom: 3px solid tomato;
+    color: tomato;
+    font-weight: bold;
+}
+
+.nav_link:active {
+  border-bottom: 3px solid tomato;
+  color: tomato;
+  font-weight: bold;
+}
+
+.launcher {
+    display: inline-block;
+}
+
+#l_dir {
+    display: inline-block;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+  }
+  
+  .nav_items_wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: center; */
+  }
+  
+  .launcher {
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    margin-left: 10px;
+  }
+  
+  .launcher label {
+    margin-right: 5px;
+  }
+  
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.left_container {
+  /* background-color: black; */
+  /* height: 200px; */
+  flex: 3;
+}
+
+.right_container {
+  /* background-color: blue; */
+  flex: 4;
+  /* height: 200px; */
+}
